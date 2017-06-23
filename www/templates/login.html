@@ -1,0 +1,85 @@
+<ion-view hide-nav-bar="true" ion-side-menu-content drag-content="toggledrag">
+    <ion-content scroll="false" style="background:#D9D9D9">
+        <div class="ionic" ng-hide="islogin">
+
+            <div class="bar bar-header bar-positive" style="background-color:#fff; border-color:#fff; background-image:none; box-shadow:none">
+                <img class="center" width="150px" height="100%" src="img/logo-uni.png"/>
+            </div>
+
+            <div class="content has-header animate-fade-slide-in" style="margin-top:40px">
+                <div class="card in" style="transition-delay: 0.32s; padding:10px; text-align:center">
+                    <h2 style="color:#850B15; font-family: serif;">Đăng Nhập Tài Khoản</h2>
+                    <p style="margin-bottom:10px">Đăng nhập tài khoản sinh viên Topica Uni để truy cập toàn bộ thông tin khoá học, bài giảng và tham gia
+                        các hoạt động
+                    </p>
+                    <button class="button button-block button-positive waves-effect waves-button waves-light ink ink-dark" style="width:70%; margin-top:0; border-color:#850B15; background-color:#850B15; display:-webkit-inline-box"
+                        ng-click="setlogin()">Đăng Nhập</button>
+                    <p style="margin-bottom:10px">hoặc đăng ký tài khoản trải nghiệm thông qua</p>
+                    <button class="button button-block button-outline button-positive light-bg icon-left ion-social-facebook waves-effect waves-button waves-light ink ink-dark"
+                        style="width:70%; margin-top:0; border-color: #850B15; border-radius:0; display:-webkit-inline-box" ng-click="loginFacebook()">Facebook</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ionic" ng-hide="!islogin">
+
+            <div class="bar bar-header bar-positive" style="background-color:#fff; border-color:#fff; background-image:none; box-shadow:none">
+                <img class="center" width="150px" height="100%" src="img/logo-uni.png" />
+            </div>
+
+            <div class="content has-header animate-fade-slide-in" style="margin-top:40px">
+                <div class="card in" style="transition-delay: 0.32s; padding:10px; text-align:center">
+                    <h2 style="color:#850B15; font-family: serif;">Đăng Nhập Tài Khoản</h2>
+                    <p style="margin-bottom:10px">Đăng nhập tài khoản sinh viên Topica Uni để truy cập toàn bộ thông tin khoá học, bài giảng và tham gia
+                        các hoạt động
+                    </p>
+                    <input  type="text" ng-model="data.username" placeholder="Tài khoản truy cập" style="color:#850B15; width:100%; border: 1px solid #850B15; margin-bottom:10px; padding-left:10px; border-radius:3px"/>
+                    <input  type="password" ng-model="data.password" placeholder="Mật khẩu truy cập" style="color:#850B15; width:100%; border: 1px solid #850B15; padding-left:10px; border-radius:3px"/>
+                    <button class="button button-block button-positive waves-effect waves-button waves-light ink ink-dark" style="width:70%; border-color:#850B15; background-color:#850B15; display:-webkit-inline-box"
+                        ng-click="login(data)">Đăng Nhập</button>
+                    <a href="" style="text-decoration: none; display:block">
+                    Bạn quên mật khẩu ?
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!--<form ng-hide="!islogin" style="height: 100%; background: url(img/welcome/welcome.jpg); background-size: cover;">
+            <h4 style="color:#fff; text-align:center; padding-top:30px; padding-bottom:50px; margin:0">
+                <img src="img/tappay.png" style="width:80px; border: 1px solid #DF7431; border-radius: 15px;">
+            </h4>
+        <div class="list">
+            <label class="item item-input ion-android-person" style="border-radius:5px; color: #fff; font-size:25px; width: 90%; margin: auto; margin-bottom:7px; background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;">
+                    <input id="textarea_2" type="text" placeholder="Mã khách hàng" ng-model="user.username" style="padding-left:20px; color: #fff" required>
+           </label>
+          <label class="item item-input ion-android-lock" style="border-radius:5px; font-size:25px;  border-top: none; width: 90%; margin: auto; background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0; color: #fff;">
+                    <input id="textarea_2" type="password" placeholder="Mật khẩu" ng-model="user.password" style="padding-left:20px; color: #fff; background: transparent;" required>
+          </label>
+          <a class="item" ng-href="#/app/forgot" style="color:#fff; text-decoration: none; float:left; margin-top:-7px">
+              Bạn quên mật khẩu ?
+            </a>
+        </div>
+        <div class="padding">
+            <button class="button waves-effect waves-light button-full button-assertive" style="color:#fff; font-size:15px; opacity:.9" ng-click="login()">Đăng Nhập</button>
+        </div>
+        <div class="button-bar padding">
+            <button class="button button-small button-outline button-positive light-bg icon-left ion-social-facebook waves-effect waves-button waves-light" style="border-color: #387ef5; border-radius: 0;" ng-click="loginFacebook()">Facebook</button>
+            <button class="button button-small button-outline button-assertive light-bg icon-left ion-social-google waves-effect waves-button waves-light" style="border-color: #ef473a;">Google+</button>
+        </div>
+        <div class="footer-link text-center">
+            <a ng-href="#/app/register" style="color:#02D652; text-decoration: none;">
+              Bạn chưa có tài khoản ?
+            </a>
+        </div>
+        
+    </form>-->
+
+        <div class="login-footer">
+            <img width="100%" height="95%" src="img/topicaunimobile.jpg" />
+        </div>
+
+
+    </ion-content>
+</ion-view>
