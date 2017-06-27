@@ -1,0 +1,102 @@
+
+<style>
+    .hero.slide-up * {
+    opacity: 1;
+    filter: alpha(opacity=1);
+}
+</style>
+<ion-view view-title="Thông tin tài khoản">
+    <ion-nav-title>
+        <img class="center" width="150px" height="100%" src="img/logo-uni.png" />
+    </ion-nav-title>
+    <ion-content style="background:#D9D9D9" class="animate-blinds" scroll="true">
+       <div class="hero slide-up" style="background-image: url('img/dashboar.jpg'); height:220px">
+            <div class="content" style="top:30px">
+                <div class="avatar motion fade" style="background-image: url('img/ava4.jpg');  border-radius:10px; width:70px; height:70px; line-height:1;"></div>
+                <h4><a class="light" style="font-weight:400; text-transform: uppercase;"> {{auth[0].full_name}}</a></h4>
+                <h4 style="font-weight:100">Lớp : <a style="font-weight:600; color: #fff">DKTV123 </a></h4>
+            </div>
+        </div>
+       
+        <!--<div class="tabs tabs-dark tabs-icon-top static" style="background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;">
+            <a class="tab-item waves-effect waves-button waves-light ink ink-dark">
+                <i class="icon ion-information-circled"></i> <span style="color:#fff; font-weight:300;"> Thông tin cơ bản </span>
+            </a>
+            <a class="tab-item waves-effect waves-button waves-light ink ink-dark">
+                <i class="icon ion-radio-waves"></i> <span style="color:#fff; font-weight:300;"> Thông tin bổ sung </span>
+            </a>
+        </div>-->
+
+       
+           <!--thong tin co ban-->
+
+        <div class="list card">
+            <ion-list>
+                <ion-item nav-clear menu-close href="" style="color:red">
+                    <a>
+                        <i class="ion-email" style="font-family:'robotolight', sans-serif; margin-right:10px ;color:#850B15; font-size:30px; border-radius:5px; padding-left:11px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">{{auth[0].study_email}}</span>
+                     </a>
+                </ion-item>
+
+                <!--<hr class="style14"/>-->
+
+                <ion-item nav-clear menu-close href="" style="color:red">
+                    <a>
+                        <i class="ion-ios-calendar-outline" style="font-family:'robotolight', sans-serif; margin-right:8px ;color:#8545A6; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">{{auth[0].birthday}}</span>
+                     </a>
+                </ion-item>
+                <ion-item nav-clear menu-close href="">
+                    <a>
+                     <i class="ion-male" ng-show=" auth[0].sex === true " style="font-family:'robotolight', sans-serif; margin-right:10px ;color:#D24725; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                     <i class="ion-female" ng-show=" auth[0].sex === false " style="font-family:'robotolight', sans-serif; margin-right:16px ;color:#D24725; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>                                
+                     <span style="color:#850B15; vertical-align: super;" ng-show=" auth[0].sex === true ">Nam</span>
+                     <span style="color:#850B15; vertical-align: super;" ng-show=" auth[0].sex === false ">Nữ</span>                     
+                   </a>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <!--thong tin bo sung-->
+
+        <div class="list card">
+            <ion-list>
+                <ion-item nav-clear menu-close href="" style="color:red">
+                    <a>
+                        <i class="ion-university" style="font-family:'robotolight', sans-serif; margin-right:10px ;color:#17A559; font-size:30px; border-radius:5px; padding-left:11px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">Giám Đốc CGV</span>
+                     </a>
+                </ion-item>
+
+                <!--<hr class="style14"/>-->
+
+                <ion-item nav-clear menu-close href="" style="color:red">
+                    <a>
+                        <i class="ion-ios-briefcase" style="font-family:'robotolight', sans-serif; margin-right:5px ;color:#1573B0; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">CGV Cinema</span>
+                     </a>
+                </ion-item>
+                <ion-item nav-clear menu-close href="">
+                    <a>
+                        <i class="ion-ios-home-outline" style="font-family:'robotolight', sans-serif; margin-right:9px ;color:#014101; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">Parkson Hung Vuong Plaza, 126 Đường Hùng Vương, phường 12, Quận 5, Hồ Chí Minh</span>
+                     </a>
+                </ion-item>
+                 <ion-item nav-clear menu-close href="">
+                    <a>
+                        <i class="ion-ios-email-outline" style="font-family:'robotolight', sans-serif; margin-right:9px ;color:#D24625; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">nguyenadmin@cgv.vn</span>
+                     </a>
+                </ion-item>
+                 <ion-item nav-clear menu-close href="">
+                    <a>
+                        <i class="ion-social-facebook" style="font-family:'robotolight', sans-serif; margin-right:20px ;color:#56679E; font-size:30px; border-radius:5px; padding-left:11px; padding-right:4px; font-weight:300"></i>           
+                        <span style="color:#850B15; vertical-align: super;">facebook.com/cgvhungvuong</span>
+                     </a>
+                </ion-item>
+            </ion-list>
+        </div>
+      
+    </ion-content>
+</ion-view>

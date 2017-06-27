@@ -6,30 +6,112 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
     // Form data for the login modal
     $scope.logout = function () {
         $state.go('app.login', {}, { reload: true });
-        $window.location.reload(true);
+        $timeout(function () {
+            $window.location.reload(true);
+        });
     }
 
     $scope.go_home = function () {
         $state.go('app.home', {}, { reload: true });
-        $window.location.reload(true);
+        $timeout(function () {
+            $window.location.reload(true);
+        });
     }
 
     $scope.go_hoilanhnghe = function () {
         $state.go('app.lanhnghe', {}, { reload: true });
-        $window.location.reload(true);
+        $timeout(function () {
+            $window.location.reload(true);
+        });
     }
 
     $scope.go_chuyennganh = function () {
         $state.go('app.chuyennganh', {}, { reload: true });
-        $window.location.reload(true);
+        $timeout(function () {
+            $window.location.reload(true);
+        });
     }
 
     $scope.go_khoahoc = function () {
         $state.go('app.khoahoc', {}, { reload: true });
-        $window.location.reload(true);
+        $timeout(function () {
+            $window.location.reload(true);
+        });
+    }
+
+    $scope.go_account = function () {
+        $state.go('app.account', {}, { reload: true });
+        $timeout(function () {
+            $window.location.reload(true);
+        });
+    }
+
+    $scope.go_password = function () {
+        $state.go('app.password', {}, { reload: true });
+        $timeout(function () {
+            $window.location.reload(true);
+        });
     }
 })
-    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $window, $rootScope, $stateParams, $ionicLoading, $q, ionicMaterialInk, adService) {
+
+    .controller('AccountCtrl', function ($scope, $state, $ionicPopup, $window, $rootScope, $stateParams, ionicMaterialMotion, $ionicLoading, $q, ionicMaterialInk) {
+        $scope.auth = JSON.parse(localStorage.getItem('auth'));
+        if (!$scope.auth) {
+            $state.go('app.login', {}, { reload: true });
+            localStorage.clear();
+            $timeout(function () {
+                $window.location.reload(true);
+            });
+        }
+        //ionic.material.ink.displayEffect();
+        ionicMaterialInk.displayEffect();
+        ionicMaterialMotion.blinds({
+            selector: '.animate-blinds .item'
+        });
+
+        // change password
+        $scope.change_password = function(data){
+             if (data === undefined) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Thông báo lỗi',
+                    template: '<center>Vui lòng nhập Mật khẩu</center>'
+                });
+            } else {
+                if(data.old_password !== $scope.auth[0].pass_word){
+                    alertPopup = $ionicPopup.alert({
+                        title: 'Thông báo lỗi',
+                        template: '<center>Mật khẩu cũ không chính xác</center>'
+                    });
+                }
+                 else {
+                     $scope.old_password = true;
+                     $scope.new_password = function (data_2) {
+                         if (data_2 === undefined) {
+                             var alertPopup = $ionicPopup.alert({
+                                 title: 'Thông báo lỗi',
+                                 template: '<center>Vui lòng nhập Mật khẩu mới</center>'
+                             });
+                         } else {
+                             if (data_2.new_password !== data_2.re_password) {
+                                 alertPopup = $ionicPopup.alert({
+                                     title: 'Thông báo lỗi',
+                                     template: '<center>Mật khẩu nhập lại không chính xác</center>'
+                                 });
+                             } else {
+                                 alertPopup = $ionicPopup.alert({
+                                     title: 'Thông báo',
+                                     template: '<center>Mật khẩu đã được đổi thành công</center>'
+                                 });
+                             }
+                         }
+                     }
+                 }
+             }
+        }
+
+    })
+
+    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $window, $timeout, $rootScope, $stateParams, $ionicLoading, $q, ionicMaterialInk, adService) {
         ionicMaterialInk.displayEffect();
         $rootScope.toggledrag = false;
         $rootScope.islogin = false;
@@ -54,7 +136,9 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
                     } else {
                         window.localStorage.setItem('auth', JSON.stringify($scope.result.profile));
                         $state.go('app.home', {}, { reload: true });
-                        $window.location.reload(true);
+                        $timeout(function () {
+                            $window.location.reload(true);
+                        });
                     }
                 });
             }
@@ -71,11 +155,13 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
     })
 
     .controller('HomeCtrl', function ($scope, $stateParams, ionicMaterialInk, ionicMaterialMotion, $state, $window, $timeout) {
-        var auth = JSON.parse(localStorage.getItem('auth'));
+        $scope.auth = JSON.parse(localStorage.getItem('auth'));
         if (!$scope.auth) {
             $state.go('app.login', {}, { reload: true });
             localStorage.clear();
-            // $window.location.reload(true);
+            $timeout(function () {
+                $window.location.reload(true);
+            });
         }
 
         //ionic.material.ink.displayEffect();
@@ -101,11 +187,15 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
 
         $scope.go_hoilanhnghe = function () {
             $state.go('app.lanhnghe', {}, { reload: true });
-            $window.location.reload(true);
+            $timeout(function () {
+                $window.location.reload(true);
+            });
         }
         $scope.go_chuyennganh = function () {
             $state.go('app.chuyennganh', {}, { reload: true });
-            $window.location.reload(true);
+            $timeout(function () {
+                $window.location.reload(true);
+            });
         }
 
         $scope.go_detail_khoahoc = function (Id) {

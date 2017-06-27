@@ -22,11 +22,30 @@ var Topica = angular.module('Topica', ['ionic', 'ionic-material','dataServices',
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
+    //menu groups
     .state('app', {
         url: '/app',
         // abstract: true,
         templateUrl: 'templates/menu.html',
         controller: 'TopicaCtrl'
+    })
+    .state('app.account', {
+        url: '/account',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/menu_groups/account.html',
+                controller: 'AccountCtrl'
+            }
+        }
+    })
+    .state('app.password', {
+        url: '/password',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/menu_groups/changepass.html',
+                controller: 'AccountCtrl'
+            }
+        }
     })
     
     //home groups
