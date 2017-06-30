@@ -72,7 +72,7 @@ var Topica = angular.module('Topica', ['ionic', 'ionic-material','dataServices',
         views: {
             'menuContent': {
                 templateUrl: 'templates/home_groups/chuyennganh.html',
-                controller: 'HomeCtrl'
+                controller: 'ChuyennganhCtrl'
             }
         }
     })
@@ -81,7 +81,7 @@ var Topica = angular.module('Topica', ['ionic', 'ionic-material','dataServices',
         views: {
             'menuContent': {
                 templateUrl: 'templates/home_groups/chuyennganhdetail.html',
-                controller: 'ChuyennganhCtrl'
+                controller: 'ChuyennganhDetailCtrl'
             }
         }
     })
@@ -90,7 +90,7 @@ var Topica = angular.module('Topica', ['ionic', 'ionic-material','dataServices',
         views: {
             'menuContent': {
                 templateUrl: 'templates/menu_groups/khoahoc.html',
-                controller: 'HomeCtrl'
+                controller: 'KhoahocCtrl'
             }
         }
     })
@@ -99,7 +99,7 @@ var Topica = angular.module('Topica', ['ionic', 'ionic-material','dataServices',
         views: {
             'menuContent': {
                 templateUrl: 'templates/menu_groups/khoahocdetail.html',
-                controller: 'KhoahocCtrl'
+                controller: 'KhoahocDetailCtrl'
             }
         }
     })

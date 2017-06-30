@@ -1,9 +1,9 @@
-<ion-view>
+<ion-view hide-nav-bar="false">
     <ion-nav-title>
         <img class="center" width="150px" height="100%" src="img/logo-uni.png" />
     </ion-nav-title>
-    <ion-content style="background:#D9D9D9" class="animate-blinds" scroll="true">
-        <div class="hero slide-up item ink ink-dark" style="background-image: url('img/cn_3.jpg'); background-size: 100% 230px; background-repeat: no-repeat;
+    <ion-content style="background:#D9D9D9" class="" scroll="true">
+        <div class="hero slide-up item ink ink-dark" style="background-image: url('{{monhoc.Image_url}}'); background-size: 100% 230px; background-repeat: no-repeat;
  height:190px; border:none; margin-top:17px">
         </div>
 
@@ -15,27 +15,26 @@
             </p>
 
             <hr class="style14" />
-
             <h6 style="color:#850B15">GIẢNG VIÊN</h6>
-            <h6>NGUYỄN HOÀNG PHƯƠNG-DH KINH TẾ HCM</h6>
-            <h6 style="color:#850B15">TRỢ GIẢNG, CỐ VẤN HỌC TẬP</h6>
-            <h6>NGUYỄN PHƯƠNG ANH - TOPICA</h6>
+            <h6 style="text-transform: uppercase">{{monhoc.Teacher}}</h6>
+            <h6 style="color:#850B15">QUẢN LÝ HỌC TẬP</h6>
+            <h6 style="text-transform: uppercase">{{monhoc.Manager}}</h6>
             <h6 style="color:#850B15">THỜI GIAN HỌC</h6>
-            <h6>4 Môn - 2 tháng từ 15/06/2017 - 18/08/2017</h6>
+            <h6>9 tuần từ {{monhoc.From_day}} - {{monhoc.To_day}}</h6>
 
         </div>
 
-        <div class="hero slide-up item ink ink-dark" style="background-image: url('img/doitac.jpg'); background-size: 100% 230px; background-repeat: no-repeat;
+        <div class="hero slide-up item ink ink-dark" style="background-image: url('{{monhoc.Image_baner}}'); background-size: 100% 230px; background-repeat: no-repeat;
  height:230px; border:none; margin-top:0px">
         </div>
 
         <div class="bar bar-subheader bar-stable static text-center" style="background:#D9D9D9; border:none; box-shadow:none; margin-top:0px;">
-            <H2 class="title" style="height:40px; color:#810D16">VIRAL MARKETING</H2>
+            <H2 class="title" style="height:40px; color:#810D16">{{monhoc.Name}}</H2>
         </div>
 
         <hr class="style14" />
 
-        <div class="im-wrapper" style="background:#D9D9D9; border:none; box-shadow:none; padding-bottom:5px !important; padding-left: 5px !important; padding-right: 5px !important;">
+        <div class="im-wrapper" style="background:#D9D9D9; margin-bottom:30px; border:none; box-shadow:none; padding-bottom:5px !important; padding-left: 5px !important; padding-right: 5px !important;">
 
             <!--<div href="#/app/profile" class="item item-icon-right" style="transition-delay: 0.49s; padding-top:1px; padding-left:7px !important">-->
             <!--<h2 style="color:#850B15; font-weight:500">CHƯƠNG TRÌNH HỌC</h2>
@@ -48,11 +47,15 @@
                     <div class="input-label">
                         <h2 style="color:#850B15; font-weight:500">CHƯƠNG TRÌNH HỌC</h2>
                     </div>
-                    <select style="padding-right: 35px; background: transparent; border: 1px solid #850B15; margin-right: 10px;">
-                        <option value="">Tuần 1</option>
-                        <option selected="" value="">Tuần 2</option>
-                        <option value="">Tuần 3</option>
+                    <select style="padding-right: 35px; background: transparent; border: 1px solid #850B15; margin-right: 10px; font-weight:700"
+                           ng-model="selected_tuan" ng-change="get_detal_tuan(selected_tuan)" data-ng-options="item.text for item in So_Tuan">
+                        <!--<option selected="" value="">{{So_Tuan[0].text}}</option>-->
                     </select>
+
+                    <!--<select style="padding-right: 35px; background: transparent; border: 1px solid #850B15; margin-right: 10px; font-weight:700"
+                    ng-init="item = So_Tuan[0]" ng-model="item" ng-change="get_detal_tuan(item)">
+                        <option ng-repeat="content in So_Tuan" value="{{content.Id}}">{{content.text}}</option>
+                    </select>-->
                 </label>
 
             <!--<div class="bar bar-subheader bar-stable static" style="margin-top:10px">
@@ -82,14 +85,14 @@
 
             <label class="item item-input" style="padding-left:10px; padding-right:20px !important; margin-top:30px">
                     <div class="input-label">
-                        <h3 style="color:#850B15; font-weight:500">TUẦN 2 | 30/05 - 06/06</h3>
-                        <h3 style="color:#850B15; font-weight:900; top:10px">TỔNG QUAN VỀ MARKETING</h3>
+                        <h3 style="color:#850B15; font-weight:500">TUẦN {{tuan.Tuan}} | {{tuan.f_day}} - {{tuan.t_day}}</h3>
+                        <h3 style="color:#850B15; font-weight:900; top:10px">{{tuan.Ten_bai_hoc}}</h3>
                     </div>
 
             </label>    
 
 
-            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:5px">
+            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:5px" ng-repeat="content in tuan.Loai_bai" ng-show="content.Id === 'LT'">
                 <div class="card stable-bg ink ink-dark" style="background:#fff; margin:0">
                     <div class="item item-text-wrap item-icon-right" style="transition-delay: 0.2s;">
 
@@ -118,7 +121,7 @@
             </div>
 
 
-            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:0px">
+            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:0px" ng-repeat="content in tuan.Loai_bai" ng-show="content.Id === 'TN'">
                 <div class="card stable-bg ink ink-dark" style="background:#fff; margin:0">
                     <div class="item item-text-wrap item-icon-right" style="transition-delay: 0.2s;">
 
@@ -130,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:0px">
+            <div class="item card-item" style="transition-delay: 0.11s; padding-left:5px; padding-right:5px; margin-top:0px" ng-repeat="content in tuan.Loai_bai" ng-show="content.Id === 'BT'">
                 <div class="card stable-bg ink ink-dark" style="background:#fff; margin:0">
                     <div class="item item-text-wrap item-icon-right" style="transition-delay: 0.2s;">
 
@@ -144,9 +147,9 @@
 
         </div>
 
-        <div class="hero slide-up item ink ink-dark" style="background-image: url('img/viral.jpg'); background-size: 100% 230px; background-repeat: no-repeat;
+        <!--<div class="hero slide-up item ink ink-dark" style="background-image: url('img/viral.jpg'); background-size: 100% 230px; background-repeat: no-repeat;
  height:200px; border:none; margin-top:50px">
-        </div>
+        </div>-->
 
     </ion-content>
 </ion-view>

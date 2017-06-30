@@ -1,67 +1,43 @@
-angular.module('Topica.controllers', ['ionic', 'ngResource', 'ngSanitize', 'ionic.utils', 'chart.js', 'dataServices'])
+angular.module('Topica.controllers', ['ionic', 'ngResource', 'ngSanitize', 'ionic.utils', 'chart.js', 'dataServices', 'ngAnimate'])
 Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $window, ionicMaterialInk) {
-    $scope.auth = JSON.parse(localStorage.getItem('auth'));
+    // $scope.auth = JSON.parse(localStorage.getItem('auth'));
     ionicMaterialInk.displayEffect();
 
     // Form data for the login modal
     $scope.logout = function () {
         $state.go('app.login', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_home = function () {
         $state.go('app.home', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_hoilanhnghe = function () {
         $state.go('app.lanhnghe', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_chuyennganh = function () {
         $state.go('app.chuyennganh', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_khoahoc = function () {
         $state.go('app.khoahoc', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_account = function () {
         $state.go('app.account', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 
     $scope.go_password = function () {
         $state.go('app.password', {}, { reload: true });
-        $timeout(function () {
-            $window.location.reload(true);
-        });
     }
 })
 
-    .controller('AccountCtrl', function ($scope, $state, $ionicPopup, $window, $rootScope, $stateParams, ionicMaterialMotion, $ionicLoading, $q, ionicMaterialInk) {
+    .controller('AccountCtrl', function ($scope, $state, $ionicPopup, $window, $rootScope, $stateParams, adService, ionicMaterialMotion, $ionicLoading, $q, ionicMaterialInk) {
         $scope.auth = JSON.parse(localStorage.getItem('auth'));
         if (!$scope.auth) {
             $state.go('app.login', {}, { reload: true });
             localStorage.clear();
-            $timeout(function () {
-                $window.location.reload(true);
-            });
         }
         //ionic.material.ink.displayEffect();
         ionicMaterialInk.displayEffect();
@@ -98,10 +74,21 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
                                      template: '<center>Mật khẩu nhập lại không chính xác</center>'
                                  });
                              } else {
-                                 alertPopup = $ionicPopup.alert({
-                                     title: 'Thông báo',
-                                     template: '<center>Mật khẩu đã được đổi thành công</center>'
+                                 adService.Change_pass($scope.auth[0].user_name, data_2.new_password).then(function(response){
+                                     if (response.data.error === false) {
+                                         alertPopup = $ionicPopup.alert({
+                                             title: 'Thông báo',
+                                             template: '<center>Mật khẩu đã được đổi thành công, đăng nhập lại để tiếp tục sử dụng</center>'
+                                         });
+                                         $scope.old_password = false;
+                                    }else{
+                                        alertPopup = $ionicPopup.alert({
+                                             title: 'Thông báo',
+                                             template: '<center>'+response.data.message+'</center>'
+                                         });
+                                    }
                                  });
+                                
                              }
                          }
                      }
@@ -111,13 +98,14 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
 
     })
 
-    .controller('LoginCtrl', function ($scope, $state, $ionicPopup, $window, $timeout, $rootScope, $stateParams, $ionicLoading, $q, ionicMaterialInk, adService) {
+    .controller('LoginCtrl', function ($scope, $state, $ionicSideMenuDelegate, $ionicPopup, $window, $timeout, $rootScope, $stateParams, $ionicLoading, $q, ionicMaterialInk, adService) {
         ionicMaterialInk.displayEffect();
         $rootScope.toggledrag = false;
         $rootScope.islogin = false;
         $scope.setlogin = function () {
             $rootScope.islogin = true;
         }
+        $ionicSideMenuDelegate.canDragContent(false);
 
         $scope.login = function (data) {
             if (data === undefined || data.username === undefined || data.password === undefined || data.username === '' || data.password === '') {
@@ -154,14 +142,11 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
         }
     })
 
-    .controller('HomeCtrl', function ($scope, $stateParams, ionicMaterialInk, ionicMaterialMotion, $state, $window, $timeout) {
+    .controller('HomeCtrl', function ($scope, $stateParams, ionicMaterialInk, ionicMaterialMotion, $state, $window, $timeout, adService) {
         $scope.auth = JSON.parse(localStorage.getItem('auth'));
         if (!$scope.auth) {
             $state.go('app.login', {}, { reload: true });
             localStorage.clear();
-            $timeout(function () {
-                $window.location.reload(true);
-            });
         }
 
         //ionic.material.ink.displayEffect();
@@ -187,22 +172,9 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
 
         $scope.go_hoilanhnghe = function () {
             $state.go('app.lanhnghe', {}, { reload: true });
-            $timeout(function () {
-                $window.location.reload(true);
-            });
         }
+        
         $scope.go_chuyennganh = function () {
             $state.go('app.chuyennganh', {}, { reload: true });
-            $timeout(function () {
-                $window.location.reload(true);
-            });
-        }
-
-        $scope.go_detail_khoahoc = function (Id) {
-            $state.go('app.khoahocdetail', { 'Id': Id }, { reload: true });
-        }
-
-        $scope.go_detail_chuyenganh = function (Id) {
-            $state.go('app.chuyennganhdetail', { 'Id': Id }, { reload: true });
         }
     })
