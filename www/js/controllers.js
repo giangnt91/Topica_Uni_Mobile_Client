@@ -109,18 +109,20 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
 
         $scope.login = function (data) {
             if (data === undefined || data.username === undefined || data.password === undefined || data.username === '' || data.password === '') {
-                var alertPopup = $ionicPopup.alert({
+                alertPopup = $ionicPopup.alert({
                     title: 'Thông báo lỗi',
                     template: '<center>Vui lòng nhập Username và password</center>'
                 });
             } else {
                 adService.Signin(data.username, data.password).then(function (response) {
                     $scope.result = response.data;
-                    if ($scope.result.error === true) {
-                        var alertPopup = $ionicPopup.alert({
+                    if ($scope.result.profile.error === true) {
+                        alertPopup = $ionicPopup.alert({
                             title: 'Thông báo lỗi',
                             template: '<center>Username hoặc password không chính xác</center>'
                         });
+                        data.username = '';
+                        data.password = '';
                     } else {
                         window.localStorage.setItem('auth', JSON.stringify($scope.result.profile));
                         $state.go('app.home', {}, { reload: true });
