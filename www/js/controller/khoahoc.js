@@ -37,7 +37,7 @@ Topica
                 }
             }
             $state.go('app.khoahocdetail', { 'Id': Id }, { reload: true });
-            $window.location.reload(true);
+            // $window.location.reload(true);
         }
 
 
@@ -56,7 +56,7 @@ Topica
             selector: '.animate-fade-slide-in .item'
         });
         Id_tuan = [];
-
+	
         var id = $stateParams.Id;
         var monhoc = JSON.parse(localStorage.getItem('monhoc'));
         $scope.monhoc = monhoc;
@@ -66,14 +66,16 @@ Topica
                     $scope.bai_hoc = response.data.baihoc;
                     $scope.Noi_dung = $scope.bai_hoc[0].Noi_dung;
                     $scope.tuan = $scope.Noi_dung[0];
-
-                    for (var i = 1; i <= $scope.Noi_dung.length; i++) {
-                        Id_tuan.push({
-                            "Id": i,
-                            "text": 'Tuần '+i
-                        });
-                    }
-                    $scope.So_Tuan = Id_tuan;
+					console.log("aa");
+					if(Id_tuan.length < $scope.Noi_dung.length ){
+						for (var i = 1; i <= $scope.Noi_dung.length; i++) {
+							Id_tuan.push({
+								"Id": i,
+								"text": 'Tuần '+i
+							});
+						}			
+						$scope.So_Tuan = Id_tuan;
+					}
 
                     // watch the filtered output formats
                     $scope.$watchCollection("So_Tuan", function (val) {

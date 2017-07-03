@@ -1,6 +1,6 @@
 angular.module('Topica.controllers', ['ionic', 'ngResource', 'ngSanitize', 'ionic.utils', 'chart.js', 'dataServices', 'ngAnimate'])
 Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $window, ionicMaterialInk) {
-    // $scope.auth = JSON.parse(localStorage.getItem('auth'));
+    $scope.auth = JSON.parse(localStorage.getItem('auth'));
     ionicMaterialInk.displayEffect();
 
     // Form data for the login modal
@@ -35,6 +35,7 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
 
     .controller('AccountCtrl', function ($scope, $state, $ionicPopup, $window, $rootScope, $stateParams, adService, ionicMaterialMotion, $ionicLoading, $q, ionicMaterialInk) {
         $scope.auth = JSON.parse(localStorage.getItem('auth'));
+		console.log($scope.auth);
         if (!$scope.auth) {
             $state.go('app.login', {}, { reload: true });
             localStorage.clear();
@@ -115,8 +116,9 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
                 });
             } else {
                 adService.Signin(data.username, data.password).then(function (response) {
-                    $scope.result = response.data;
-                    if ($scope.result.profile.error === true) {
+                    $scope.result = response.data.profile;
+					console.log($scope.result);
+                    if ($scope.result.error === true) {
                         alertPopup = $ionicPopup.alert({
                             title: 'Thông báo lỗi',
                             template: '<center>Username hoặc password không chính xác</center>'
@@ -126,9 +128,9 @@ Topica.controller('TopicaCtrl', function ($scope, $ionicModal, $ionicPopover, $t
                     } else {
                         window.localStorage.setItem('auth', JSON.stringify($scope.result.profile));
                         $state.go('app.home', {}, { reload: true });
-                        $timeout(function () {
-                            $window.location.reload(true);
-                        });
+                        // $timeout(function () {
+                            // $window.location.reload(true);
+                        // });
                     }
                 });
             }
