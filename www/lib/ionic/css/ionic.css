@@ -2975,6 +2975,11 @@
 .ion-xbox:before {
   content: ""; }
 
+.crop {  
+        overflow: hidden !important; /* to hide anything that doesn't fit in the containing element. */
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important; /* to do what you want. */
+      }
 /**
  * Resets
  * --------------------------------------------------
@@ -3005,7 +3010,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font: inherit;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: 100%; }
 
 ol, ul {

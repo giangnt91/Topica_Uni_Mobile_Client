@@ -16,7 +16,17 @@
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+    <script src="lib/ng-file-upload/dist/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="lib/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script src="lib/angular-md5/angular-md5.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
+
+    <script src="https://cdn.rawgit.com/driftyco/ng-cordova/master/dist/ng-cordova.min.js"></script>
+    <script src="https://cdn.rawgit.com/nraboy/ng-cordova-oauth/master/dist/ng-cordova-oauth.min.js"></script>
+    <!--facebook-->
+    <script src="lib/angular/angular-facebook.js"></script>
+    <!-- path to ionic -->
+    <script src="lib/ionic/js/ionic-datepicker.bundle.min.js"></script>
     
     <script src="cordova.js"></script>
     <script src="js/ng-cordova.js"></script>
@@ -24,38 +34,64 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+	<script src="js/controller/auth.js"></script>
     <script src="js/controller/khoahoc.js"></script>
+    <script src="js/controller/khoahocyeuthich.js"></script>
     <script src="js/controller/chuyennganh.js"></script>
+    <script src="js/controller/kehoachhoctap.js"></script>
     <script src="js/services.js"></script>
+     
+<script type="text/javascript">
+            // Wait for device API libraries to load
+            function onLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+            // device APIs are available
+            function onDeviceReady() {
+                window.open = cordova.InAppBrowser.open;
+                // cordova.ThemeableBrowser.open('http://apache.org', '_blank', { statusbar: { color: '#ffffffff' },
+                // toolbar: { height: 44, color: '#f0f0f0ff' }, title: { color: '#003264ff', showPageTitle: true }, backButton: { image: 'back',
+                // imagePressed: 'back_pressed', align: 'left', event: 'backPressed' }, forwardButton: { image: 'forward', imagePressed: 'forward_pressed',
+                // align: 'left', event: 'forwardPressed' }, closeButton: { image: 'close', imagePressed: 'close_pressed', align: 'left', event:
+                // 'closePressed' }, customButtons: [ { image: 'share', imagePressed: 'share_pressed', align: 'right', event: 'sharePressed'
+                // } ], menu: { image: 'menu', imagePressed: 'menu_pressed', title: 'Test', cancel: 'Cancel', align: 'right', items: [ { event:
+                // 'helloPressed', label: 'Hello World!' }, { event: 'testPressed', label: 'Test!' } ] }, backButtonCanClose: true }).addEventListener('backPressed',
+                // function(e) { alert('back pressed'); }).addEventListener('helloPressed', function(e) { alert('hello pressed'); }).addEventListener('sharePressed',
+                // function(e) { alert(e.url); }).addEventListener(cordova.ThemeableBrowser.EVT_ERR, function(e) { console.error(e.message);
+                // }).addEventListener(cordova.ThemeableBrowser.EVT_WRN, function(e) { console.log(e.message); });
+                // if (window.cordova && window.cordova.plugins.Keyboard) { window.cordova.plugins.Keyboard.disableScroll(true); }
 
-    <script type="text/javascript">
-        // Wait for device API libraries to load
-        //
-        function onLoad() {
-            document.addEventListener("deviceready", onDeviceReady, false);
-        }
-         // device APIs are available
-    //
-         function onDeviceReady() {
-            // Register the event listener
-            document.addEventListener("backbutton", onBackKeyDown, false);
-            // var appv = document.getElementById('version');
-            // cordova.getAppVersion.getVersionNumber().then(function (version) {
-            //     appv.innerHTML = "v." + version;
-            // });
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                    window.cordova.plugins.Keyboard.disableScroll(true);
-                }
-        }
-
-        // Handle the back button
-        //
-        function onBackKeyDown() {
-            event.preventDefault(); // EDIT
-            navigator.app.exitApp(); // exit the app
-        }
+            }
     </script>
+    
+   <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '1946240225621730',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();   
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <style>
+          body.menu-open ion-side-menu-content {
+             -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+            -o-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+         }
         .float-button {
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -90,6 +126,6 @@
     </style>
 </head>
 <body ng-app="Topica">
-    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <ion-nav-view></ion-nav-view>
 </body>
 </html>

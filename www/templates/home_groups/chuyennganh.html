@@ -2,38 +2,35 @@
     <ion-nav-title>
         <img class="center" width="150px" height="100%" src="img/logo-uni.png" />
     </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons button-clear ion-ios-arrow-back" style="color: #850B15; font-size: xx-large;" ng-click="myGoBack()">
+        </button>
+    </ion-nav-buttons>
     <ion-content style="background:#D9D9D9" class="" scroll="true">
 
         <div class="bar bar-subheader bar-stable static text-center" style="background:#D9D9D9; border:none; box-shadow:none; margin-top:20px;">
             <H2 class="title" style="height:40px; color:#810D16">CÁC CHUYÊN NGÀNH ĐÀO TẠO</H2><br/><br/>
             <p style="font-size:13px">Topica UNI đang phối hợp triển khai đào tạo các chuyên ngành</p>
         </div>
-        
-        <div class="ionic animated zoomIn" style="width:95%; margin-bottom:30px">
+
+        <div class="ionic animated zoomIn" style="width:95%">
             <div class="list">
 
-            <div class="card card-gallery item item-text-wrap" style="transition-delay: 0.11s; margin-top:25px" ng-repeat="content in result">
-                <div class="ink dark-bg text-center" ng-click="go_detail_chuyenganh(content.Id_subject)">
-                    <h2>{{content.Name}}</h2>
-                    <img class="full-image" src="{{content.Image}}" height="150px">
+                <div class="card card-gallery item item-text-wrap" style="transition-delay: 0.11s; margin-top:25px" ng-repeat="content in result">
+                    <div class="ink dark-bg text-center" ng-click="go_detail_chuyenganh(content.Id_subject)">
+                        <h2>{{content.Name}}</h2>
+                        <img class="full-image" src="{{content.Image}}" height="150px">
+                    </div>
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item stable-bg assertive" ng-repeat="img in content.Truong">
+                            <img src="{{img.Image_url}}" height="43" style="display: -webkit-inline-box;">
+                        </a>
+                    </div>
                 </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive" ng-repeat="img in content.Truong">
-                        <img src="{{img.Image_url}}" height="43" style="display: -webkit-inline-box;">
-                    </a>
-                    <!--<a class="tab-item stable-bg assertive">
-                        <img src="img/logo/logozee_logo-truong-dai-hoc-hung-vuong.png" height="43" style="display: -webkit-inline-box;">
-                    </a>
-                    <a class="tab-item stable-bg assertive">
-                        <img src="img/logo/California-Institute-of-Technology-Logo-design  .png" height="43" style="display: -webkit-inline-box;">
-                    </a>-->
-                </div>
-            </div>
-
+                <hr style="border:1px solid transparent; margin-bottom:30px"/>
 
             </div>
         </div>
 
-        
     </ion-content>
 </ion-view>

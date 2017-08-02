@@ -2,29 +2,35 @@
     <ion-nav-title>
         <img class="center" width="150px" height="100%" src="img/logo-uni.png" />
     </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button back-button buttons button-clear ion-ios-arrow-back" style="color: #850B15; font-size: xx-large;" ng-click="myGoBack()">
+        </button>
+    </ion-nav-buttons>
     <ion-content style="background:#D9D9D9" scroll="true">
 
         <div class="bar bar-subheader bar-stable static text-center" style="background:#D9D9D9; border:none; box-shadow:none; margin-top:20px; margin-bottom:-15px">
-            <H2 class="title" style="height:40px; color:#810D16">CÁC MÔN HỌC CỦA TÔI</H2>
-        </div>
-        
-        <div class="ionic" style="width:95%; margin-bottom:30px" ng-show="result.length > 0">
-            <div class="list">
-               
-            <div class="card card-gallery animated zoomIn item item-text-wrap" style="transition-delay: 0.11s; margin-top:15px" ng-repeat="content in result">
-                <div class="ink dark-bg text-center" ng-click="go_detail_khoahoc(content.Id_subject)">
-                    <img class="full-image" src="{{content.Image_url}}" height="150px">
-                </div>
-                <div class="dark-bg text-center">
-                    <h2>{{content.Name}}</h2>
-                </div>
-            </div>
-
-            
-
-            </div>
+            <H2 ng-show=" auth[0].provider !== 1 " class="title" style="height:40px; color:#810D16">CÁC MÔN HỌC CỦA TÔI</H2>
+            <h2 ng-show=" auth[0].provider === 1 " class="title" style="height:40px; color:#810D16">HIỆN TẠI BẠN CHƯA CÓ MÔN HỌC NÀO !</h2>
         </div>
 
-        
+        <div class="ionic" style="margin-bottom:30px" ng-show="result.length > 0">
+            <div ng-repeat="content in result" ng-show=" auth[0].provider !== 1 ">
+                <div class="list half" style="padding: 10px 9px 0px 8px !important">
+                    <div class="card card-gallery animated zoomIn item item-text-wrap" style="transition-delay: 0.11s; margin-top:3px">
+                        <div class="dark-bg text-center" ng-click="go_detail_khoahoc(content.Id_subject)">
+                            <h2 class="crop" style="text-transform: uppercase">{{content.Name}}</h3>
+                        </div>
+                        <div class="ink dark-bg text-center" ng-click="go_detail_khoahoc(content.Id_subject)">
+                            <img class="full-image" src="{{content.Image_url}}" height="150px">
+                        </div>
+                        <div class="item tabs text-center" style="transition-delay: 0.34s;">
+                            <button class="button button-flat" style="padding: 0 12px !important; background: transparent; color:#821018">{{content.Id_subject}}</button>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+
     </ion-content>
 </ion-view>

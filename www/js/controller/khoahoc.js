@@ -12,6 +12,9 @@ Topica
         ionicMaterialMotion.fadeSlideInRight({
             selector: '.animate-fade-slide-in .item'
         });
+        $scope.myGoBack = function() {
+                $window.history.go(-1);
+            };
 
         //check cache
         if ($scope.result === undefined) {
@@ -43,6 +46,7 @@ Topica
 
     })
     .controller('KhoahocDetailCtrl', function ($scope, $stateParams, ionicMaterialInk, $ionicPopup, ionicMaterialMotion, $state, $window, $timeout, adService) {
+       $scope.auth = JSON.parse(localStorage.getItem('auth'));
         //ionic.material.ink.displayEffect();
         ionicMaterialInk.displayEffect();
 
@@ -55,8 +59,18 @@ Topica
         ionicMaterialMotion.fadeSlideInRight({
             selector: '.animate-fade-slide-in .item'
         });
+        $scope.myGoBack = function() {
+                $window.history.go(-1);
+            };
+        $scope.go_landing_page = function () {
+            if ($scope.auth[0].provider === 1) {
+                // window.location.href = 'http://appmob.uni.topica.edu.vn/app-test';
+                window.open('http://appmob.uni.topica.edu.vn/app-test', '_blank', 'location=yes,toolbar=yes');
+            }
+        }
+
         Id_tuan = [];
-	
+
         var id = $stateParams.Id;
         var monhoc = JSON.parse(localStorage.getItem('monhoc'));
         $scope.monhoc = monhoc;
@@ -66,16 +80,15 @@ Topica
                     $scope.bai_hoc = response.data.baihoc;
                     $scope.Noi_dung = $scope.bai_hoc[0].Noi_dung;
                     $scope.tuan = $scope.Noi_dung[0];
-					console.log("aa");
-					if(Id_tuan.length < $scope.Noi_dung.length ){
-						for (var i = 1; i <= $scope.Noi_dung.length; i++) {
-							Id_tuan.push({
-								"Id": i,
-								"text": 'Tuần '+i
-							});
-						}			
-						$scope.So_Tuan = Id_tuan;
-					}
+                    if (Id_tuan.length < $scope.Noi_dung.length) {
+                        for (var i = 1; i <= $scope.Noi_dung.length; i++) {
+                            Id_tuan.push({
+                                "Id": i,
+                                "text": 'Tuần ' + i
+                            });
+                        }
+                        $scope.So_Tuan = Id_tuan;
+                    }
 
                     // watch the filtered output formats
                     $scope.$watchCollection("So_Tuan", function (val) {
@@ -85,10 +98,10 @@ Topica
                 }
             });
 
-            $scope.get_detal_tuan = function(item){
-                for(var i=0; i<$scope.Noi_dung.length; i++){
-                    if(item.Id === $scope.Noi_dung[i].Tuan){
-                       $scope.tuan = $scope.Noi_dung[i];
+            $scope.get_detal_tuan = function (item) {
+                for (var i = 0; i < $scope.Noi_dung.length; i++) {
+                    if (item.Id === $scope.Noi_dung[i].Tuan) {
+                        $scope.tuan = $scope.Noi_dung[i];
                     }
                 }
             }
